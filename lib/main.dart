@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:class_recorder/class.dart' as classPage;
 import 'package:class_recorder/save.dart' as save;
 
+
+//12:56
 void main() {
   save.saveSetup();
   runApp(appMain());
