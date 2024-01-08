@@ -42,6 +42,12 @@ class _mainPage extends State<mainPage>{
 
   @override
   Widget build(BuildContext context){
+    int edCot = 0;
+    for(int i=0;i<classPage.classSit.length;i++){
+      if(classPage.classSit[i][1] == '1'){
+        edCot ++;
+      }
+    }
     return Scaffold(
       appBar: AppBar(
         actions: [
@@ -52,13 +58,62 @@ class _mainPage extends State<mainPage>{
         ],
       ),
       body: Column(
-        children: [
-          Text('Class 0',style:TextStyle(fontSize: 30),),
 
+        children: [
+          Text('繳交紀錄',style:TextStyle(fontSize: 30),),
+          SizedBox(
+            height: 20,
+          ),
           Container(
             height: 550,
             margin: EdgeInsets.all(25),
-            child: classPage.classPage(),
+            child: Column(
+              children: [
+
+                Row(
+                  children: [
+                    Text(
+                      '  已繳交 $edCot',
+                      style:TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                    Text(
+                      '  未繳交 ${classPage.classSit.length-edCot}',
+                      style:TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
+
+                Row(
+                  children: [
+                    Text(
+                      '  已收到金額 ${edCot*315}',
+                      style:TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  ],
+                ),
+
+                Divider(
+                  color: Color.fromARGB(255, 200, 200, 200),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
+                SizedBox(
+                  height: 450,
+                  child: classPage.classPage(),
+                )
+
+              ],
+            )
           )
         ],
       ),
