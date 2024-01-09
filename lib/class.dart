@@ -1,10 +1,7 @@
 import 'dart:ffi';
-import 'package:haptic_feedback/haptic_feedback.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-final canVibrate = Haptics.canVibrate();
-
+import 'package:flutter/services.dart';
 
 class classPage extends StatefulWidget {
   @override
@@ -109,14 +106,14 @@ class _classPage extends State<classPage> {
                           )
                       ),
                       onTap: (){
+                        HapticFeedback.heavyImpact();
 
-
-                          setState(() {
+                        setState(() {
                             nowIndex = index;
                             print(nowIndex);
                             print(classSit[index][1]=='0');
 
-                            Haptics.vibrate(HapticsType.medium);
+                            HapticFeedback.heavyImpact();
                             _pageController.animateToPage(
                               1,
                               duration: Duration(milliseconds: 500),
@@ -142,6 +139,7 @@ class _classPage extends State<classPage> {
                     children: [
                       IconButton(
                           onPressed: (){
+                            HapticFeedback.lightImpact();
                             _pageController.animateToPage(
                               0,
                               duration: Duration(milliseconds: 500),
@@ -161,6 +159,8 @@ class _classPage extends State<classPage> {
                   ),
                   onTap: (){
                     print(nowIndex);
+                    HapticFeedback.heavyImpact();
+
                     _pageController.animateToPage(
                       0,
                       duration: Duration(milliseconds: 500),
@@ -212,6 +212,8 @@ class _classPage extends State<classPage> {
                   ),
                   OutlinedButton(
                       onPressed: (){
+                        HapticFeedback.heavyImpact();
+
                         classSit[nowIndex][1] = (classSit[nowIndex][1]=='0')? '1':'0';
 
                         saveData();
