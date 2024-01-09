@@ -66,6 +66,7 @@ class _mainPage extends State<mainPage>{
       body:
           PageView(
             controller: controller,
+            physics: NeverScrollableScrollPhysics(),
             children: [
               pageList[0],
               pageList[1],

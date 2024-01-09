@@ -105,7 +105,7 @@ class _classPage extends State<classPage> {
                             ),
                           )
                       ),
-                      onTap: (){
+                      onLongPress: (){
                         HapticFeedback.heavyImpact();
 
                         setState(() {
@@ -120,8 +120,13 @@ class _classPage extends State<classPage> {
                               curve: Curves.fastEaseInToSlowEaseOut,
                             );
                           });
+                      },
+                      onTap: (){
+                        HapticFeedback.heavyImpact();
+                        classSit[index][1] = '1';
+                        setState(() {
 
-
+                        });
                       },
                     )
                 );
