@@ -32,7 +32,7 @@ class _caseList extends State<caseList>{
           height: 10,
         ),
         Container(
-            height: 550,
+            height: 500,
             margin: EdgeInsets.all(25),
             child: Column(
               children: [
@@ -45,7 +45,7 @@ class _caseList extends State<caseList>{
                         children: [
                           InkWell(
                             child: AnimatedDefaultTextStyle(
-                              child: Text('  待完成 '),
+                              child: Text(' 待完成 '),
                               style:TextStyle(
                                 color: Colors.black,
                                 fontSize: getTextSize(0),
@@ -57,9 +57,9 @@ class _caseList extends State<caseList>{
                             onTap: (){
                               pageTag = 0;
                               controller.animateToPage(
-                                  0,
-                                  duration: Duration(milliseconds: 100),
-                                  curve: Curves.easeInOut,
+                                0,
+                                duration: Duration(milliseconds: 100),
+                                curve: Curves.easeInOut,
                               );
                               setState(() {
 
@@ -68,7 +68,7 @@ class _caseList extends State<caseList>{
                           ),
                           InkWell(
                             child: AnimatedDefaultTextStyle(
-                              child: Text('  已完成 '),
+                              child: Text(' 已完成 '),
                               style:TextStyle(
                                 color: Colors.black,
                                 fontSize: getTextSize(1),
@@ -100,20 +100,33 @@ class _caseList extends State<caseList>{
                 ),
 
                 SizedBox(
-                  child: PageView(
+                  height: 10,
+                ),
 
-                    controller:  controller,
-                    children: [
-                      notfinishList(),
-                      finishList(),
-                    ],
-                    physics: NeverScrollableScrollPhysics(),
+                Expanded(
+                  child: SizedBox(
+                    child: PageView(
+
+                      controller:  controller,
+                      children: [
+                        notfinishList(),
+                        finishList(),
+                      ],
+
+                      onPageChanged: (index){
+
+                        pageTag = index;
+                        setState(() {
+
+                        });
+
+                      },
+
+                    ),
 
                   ),
-
-                  width: 500,
-                  height: 400,
                 ),
+
 
               ],
             )
@@ -132,12 +145,35 @@ class finishList extends StatefulWidget{
   }
 
 }
+List<String> myList = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5'];
 
 class _finishList extends State<finishList>{
 
   @override
   Widget build(BuildContext context){
-    return Text('dd');
+    return Column(
+      children: [
+        Expanded(
+          child: ListView.builder(
+              itemCount: myList.length,
+              itemBuilder: (BuildContext context,int index){
+                return Container(
+                  width: 550,
+                  height: 80,
+                  margin: EdgeInsets.all(5),
+                  padding: EdgeInsets.all(10),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(20),
+                    color: Color.fromARGB(100, 240, 240, 240),
+                  ),
+                  child: Text(myList[index]),
+                  
+                );
+              }
+          ),
+        ),
+      ],
+    );
   }
 
 }

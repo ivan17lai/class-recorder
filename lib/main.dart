@@ -6,8 +6,10 @@ import 'package:class_recorder/caseList.dart' as caseList;
 
 //12:56
 void main() {
+
   save.saveSetup();
   runApp(appMain());
+
 }
 
 
@@ -20,7 +22,11 @@ class appMain extends StatelessWidget{
   Widget build(BuildContext context){
     return MaterialApp(
       title: 'class Recorder',
-      home: mainPage(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => page_case(),
+        '/caseview': (context) => mainPage(),
+      },
       theme: ThemeData(
         colorScheme: ColorScheme.light(
           primary: Colors.tealAccent,  // 设置主要颜色
@@ -75,76 +81,7 @@ class _mainPage extends State<mainPage>{
 
           ),
 
-      bottomNavigationBar: BottomNavigationBar(
-        items: [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.account_circle_outlined),
-            label: '紀錄',
 
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.list),
-            label: '任務',
-          ),
-        ],
-        currentIndex: pageIndex,
-        onTap: (index){
-          setState(() {
-            pageIndex = index;
-            controller.animateToPage(index,
-                duration: Duration(milliseconds: 500),
-                curve: Curves.fastEaseInToSlowEaseOut);
-          });
-        },
-      ),
-
-      floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.article_outlined),
-        onPressed: (){
-          showModalBottomSheet(
-              context: context,
-              builder: (BuildContext context){
-
-                int edCot = 0;
-                for(int i=0;i<classPage.classSit.length;i++){
-                  if(classPage.classSit[i][1] == '1'){
-                    edCot ++;
-                  }
-                }
-
-                return Container(
-                  height: 250.0,
-                  decoration: BoxDecoration(
-                    color: Colors.white,
-                    borderRadius: BorderRadius.circular(25),
-                  ),
-                  child: Center(
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Text('繳交統計',style: TextStyle(fontSize: 20),),
-                        SizedBox(
-                          height: 30,
-                        ),
-                        Text('繳交人數 37/$edCot',style: TextStyle(fontSize: 30),),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Text('總金額 ${edCot*315} \$',style: TextStyle(fontSize: 30),),
-                        SizedBox(
-                          height: 40,
-                        ),
-                      ],
-                    ),
-                  ),
-                );
-              }
-          );
-        },
-        backgroundColor: Colors.white,
-      ),
 
     );
   }
@@ -180,7 +117,7 @@ class _page_record extends State<page_record>{
           height: 20,
         ),
         Container(
-            height: 550,
+            height: 700,
             margin: EdgeInsets.all(25),
             child: Column(
               children: [
@@ -237,26 +174,33 @@ class _page_record extends State<page_record>{
 }
 
 
-class page_case extends StatefulWidget{
-
-  @override
-  _page_case createState(){
-    return _page_case();
-  }
-
-}
-
-class _page_case extends State<page_case>{
+class page_case extends StatelessWidget{
 
   @override
   Widget build(BuildContext context){
 
+    return Scaffold(
 
-    return Column(
-      children: [
-        caseList.caseList(),
-      ],
+      appBar: AppBar(
+        title: Center(
+        ),
+        backgroundColor: Color.fromARGB(, 255, 255, 255),
+        actions: [
+          IconButton(
+              onPressed: (){
+              },
+              icon: Icon(Icons.settings),
+          ),
+        ],
+      ),
+      body: Column(
+        children: [
+          caseList.caseList(),
+        ],
+      ),
+      backgroundColor: Color.fromARGB(250, 255, 255, 255),
     );
+
   }
 
 }
